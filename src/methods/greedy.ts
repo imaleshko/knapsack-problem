@@ -2,6 +2,7 @@ import type { Item, KnapsackInput } from "@/interfaces.ts";
 
 export interface GreedyItem extends Item {
   ratio: number;
+  isSelected?: boolean;
 }
 
 export interface GreedyResult {
@@ -30,9 +31,12 @@ export const greedy = ({ items, capacity }: KnapsackInput): GreedyResult => {
 
   for (const item of sortedItems) {
     if (currentWeight + item.weight <= capacity) {
+      item.isSelected = true;
       selectedItems.push(item);
       currentWeight += item.weight;
       currentValue += item.value;
+    } else {
+      item.isSelected = false;
     }
   }
 
