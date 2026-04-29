@@ -1,4 +1,4 @@
-import type { Item, KnapsackInput } from "./interfaces.ts";
+import type { Item, KnapsackInput } from "../interfaces.ts";
 
 export interface BruteForceResultLine {
   subset: Item[];
@@ -23,7 +23,7 @@ const bruteForce = ({
     let totalWeight = 0;
     let totalValue = 0;
 
-    for (let j = 0; j < n; i++) {
+    for (let j = 0; j < n; j++) {
       if ((i & (1 << j)) !== 0) {
         subset.push(items[j]);
         totalWeight += items[j].weight;
