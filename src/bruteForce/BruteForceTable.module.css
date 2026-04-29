@@ -1,0 +1,37 @@
+.resultsTitle {
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.th,
+.td {
+  border: 1px solid #777;
+  padding: 10px;
+  text-align: center;
+}
+
+.th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.textInvalid {
+  color: #d32f2f;
+}
+
+.textValid {
+  color: #f57f17;
+}
+
+.textBest {
+  color: #2e7d32;
+  font-weight: bold;
+}
