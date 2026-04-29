@@ -10,39 +10,82 @@
 }
 
 .card {
-  border: 1px solid #777;
+  border: 1px solid var(--border-color);
   border-radius: 20px;
-  padding: 20px 40px 40px;
+  padding: 20px 40px;
   margin-bottom: 30px;
 }
 
 .cardTitle {
   text-align: center;
   font-size: 20px;
-  margin-top: 0;
+  margin: 0 0 30px;
+}
+
+.capacityWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
   margin-bottom: 30px;
 }
 
-.inputRow {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.inputGroup {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.capacityLabel {
+  font-weight: bold;
 }
 
 .input {
   padding: 6px 12px;
-  border-radius: 20px;
-  border: 1px solid #777;
-  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
   text-align: center;
+}
+
+.tableWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.inputTable {
+  border-collapse: collapse;
+}
+
+.inputTh {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  text-align: center;
+  background-color: var(--back-color);
+  font-weight: bold;
+  min-width: 60px;
+}
+
+.inputTdHeader {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  background-color: var(--back-color);
+  font-weight: bold;
+  text-align: left;
+}
+
+.inputTd {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  text-align: center;
+}
+
+.tableInput {
+  width: 50px;
+  padding: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  text-align: center;
+  font-family: inherit;
+  outline: none;
+}
+
+.tableInput:focus {
+  border-color: var(--border-color);
 }
 
 .buttonRow {
@@ -55,8 +98,8 @@
 .button {
   padding: 10px 20px;
   border-radius: 20px;
-  border: 1px solid #777;
-  background-color: transparent;
+  border: 1px solid var(--border-color);
+  background: none;
   cursor: pointer;
 }
 
@@ -67,4 +110,8 @@
 .results {
   margin-top: 60px;
   text-align: center;
+}
+
+.resultsTitle {
+  margin-bottom: 20px;
 }

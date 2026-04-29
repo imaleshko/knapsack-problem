@@ -1,4 +1,4 @@
-import type { Item, KnapsackInput } from "@/interfaces.ts";
+import type { Item, KnapsackInput } from "src/interfaces.ts";
 
 export interface GreedyItem extends Item {
   ratio: number;

@@ -1,11 +1,11 @@
-import type { GreedyResult } from "@/methods/greedy.ts"; // Перевірте шлях
-import styles from "./GreedyTable.module.css";
+import type { GreedyResult } from "./greedy.ts"; // Перевірте шлях
+import styles from "./GreedyVisualization.module.css";
 
 interface GreedyTableProps {
   result: GreedyResult;
 }
 
-export const GreedyTable = ({ result }: GreedyTableProps) => {
+export const GreedyVisualization = ({ result }: GreedyTableProps) => {
   if (!result || !result.sortedItems) return null;
 
   return (

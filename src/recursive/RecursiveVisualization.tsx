@@ -1,23 +1,23 @@
-import type { Node, BranchesResult } from "./branches.ts";
-import styles from "./BranchesVisualization.module.css";
+import type { RecursionNode, RecursiveResult } from "./recursive.ts";
+import styles from "./RecursiveVisualization.module.css";
 
 type TreeNodeProps = {
-  node: Node;
+  node: RecursionNode;
 };
 
-interface BranchesTableProps {
-  result: BranchesResult;
+interface RecursiveVisualizationProps {
+  result: RecursiveResult;
 }
 
 const TreeNode = ({ node }: TreeNodeProps) => {
   const isEnd = !node.includeBranch && !node.excludeBranch;
-  const boundValue = Number.isInteger(node.bound)
-    ? node.bound
-    : node.bound.toFixed(2);
 
-  const title = `${node.action} ${
-    node.currentItemId ? `предмет ${node.currentItemId}` : ""
-  } | Вага зараз: ${node.weight} | Цінність зараз: ${node.value} | Теоретична межа цієї гілки: ${boundValue} |`;
+  const itemInfo =
+    node.action !== "Кінець масиву" && node.action !== "Вичерпано місткість"
+      ? `Предмет: ${node.itemIndex + 1} | `
+      : "";
+
+  const title = `${node.action} | ${itemInfo} | Залишок місткості: ${node.capacityLeft} | Повертає: ${node.returnedValue} |`;
 
   let summaryClass = styles.treeSummary;
   let statusText = "";
@@ -25,9 +25,9 @@ const TreeNode = ({ node }: TreeNodeProps) => {
   if (node.isPartOfBestPath) {
     summaryClass = `${styles.treeSummary} ${styles.treeOptimal}`;
     statusText = "Оптимальний шлях";
-  } else if (node.isPruned) {
+  } else if (isEnd && node.returnedValue === 0) {
     summaryClass = `${styles.treeSummary} ${styles.treePruned}`;
-    statusText = "Відсічено";
+    statusText = "Базовий випадок";
   }
 
   if (isEnd) {
@@ -53,15 +53,17 @@ const TreeNode = ({ node }: TreeNodeProps) => {
   );
 };
 
-export const BranchesVisualization = ({ result }: BranchesTableProps) => {
-  if (!result || !result.rootNode) return null;
+export const RecursiveVisualization = ({
+  result,
+}: RecursiveVisualizationProps) => {
+  if (!result || !result.executionTree) return null;
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.summaryBox}>
         <p>
           <span>Максимальна знайдена цінність:</span>
-          <span className={styles.summaryValue}> {result.maxValue}</span>
+          <span className={styles.summaryValue}> {result.maxTotalValue}</span>
         </p>
         <p>
           <span>Оптимальний набір: </span>
@@ -74,10 +76,10 @@ export const BranchesVisualization = ({ result }: BranchesTableProps) => {
       </div>
 
       <div className={styles.treeContainer}>
-        <TreeNode node={result.rootNode} />
+        <TreeNode node={result.executionTree} />
       </div>
     </div>
   );
 };
 
-export default BranchesVisualization;
+export default RecursiveVisualization;

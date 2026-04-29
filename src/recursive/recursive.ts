@@ -1,23 +1,19 @@
-import type { KnapsackInput } from "../interfaces.ts";
+import type { Item, KnapsackInput } from "@/interfaces.ts";
 
 export interface RecursionNode {
   stepId: number;
   itemIndex: number;
   capacityLeft: number;
-  action:
-    | "Початок"
-    | "Беремо"
-    | "Пропускаємо"
-    | "Досягнуто кінця масиву"
-    | "Вичерпано місткість"
-    | "Не поміщається";
+  action: string;
   returnedValue: number;
   includeBranch?: RecursionNode;
   excludeBranch?: RecursionNode;
+  isPartOfBestPath?: boolean;
 }
 
 export interface RecursiveResult {
   maxTotalValue: number;
+  bestItems: Item[];
   executionTree: RecursionNode;
 }
 
@@ -30,7 +26,7 @@ export const recursive = ({
   const knapsack = (
     index: number,
     currentCapacity: number,
-    action: RecursionNode["action"],
+    action: string,
   ): RecursionNode => {
     const currentStepId = ++stepCounter;
 
@@ -39,7 +35,7 @@ export const recursive = ({
         stepId: currentStepId,
         itemIndex: index,
         capacityLeft: currentCapacity,
-        action: "Досягнуто кінця масиву",
+        action: "Кінець масиву",
         returnedValue: 0,
       };
     }
@@ -83,23 +79,47 @@ export const recursive = ({
     const excludeValue = excludeBranch.returnedValue;
     const includeValue = currentItem.value + includeBranch.returnedValue;
 
-    const bestValue = Math.max(excludeValue, includeValue);
-
     return {
       stepId: currentStepId,
       itemIndex: index,
       capacityLeft: currentCapacity,
       action,
-      returnedValue: bestValue,
+      returnedValue: Math.max(excludeValue, includeValue),
       includeBranch,
       excludeBranch,
     };
   };
 
-  const executionTree = knapsack(0, capacity, "Початок");
+  const executionTree = knapsack(0, capacity, "Корінь");
+  const bestItems: Item[] = [];
+
+  const markOptimalPath = (node: RecursionNode) => {
+    node.isPartOfBestPath = true;
+
+    if (!node.includeBranch && !node.excludeBranch) return;
+
+    if (!node.includeBranch) {
+      if (node.excludeBranch) markOptimalPath(node.excludeBranch);
+      return;
+    }
+
+    const currentItem = items[node.itemIndex];
+    const includeValue =
+      currentItem.value + (node.includeBranch.returnedValue || 0);
+    const excludeValue = node.excludeBranch?.returnedValue || 0;
+    if (includeValue > excludeValue) {
+      bestItems.push(currentItem);
+      markOptimalPath(node.includeBranch);
+    } else {
+      markOptimalPath(node.excludeBranch!);
+    }
+  };
+
+  markOptimalPath(executionTree);
 
   return {
     maxTotalValue: executionTree.returnedValue,
+    bestItems,
     executionTree,
   };
 };

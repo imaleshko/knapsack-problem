@@ -1,11 +1,11 @@
-import type { BruteForceResultLine } from "src/methods/bruteForce.ts";
-import styles from "./BruteForceTable.module.css";
+import type { BruteForceResultLine } from "./bruteForce.ts";
+import styles from "./BruteForceVisualization.module.css";
 
 interface BruteForceTableProps {
   results: BruteForceResultLine[];
 }
 
-export const BruteForceTable = ({ results }: BruteForceTableProps) => {
+export const BruteForceVisualization = ({ results }: BruteForceTableProps) => {
   if (!results || results.length === 0) return null;
 
   return (
