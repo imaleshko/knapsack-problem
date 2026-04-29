@@ -6,7 +6,7 @@ export interface DPResult {
   selectedItems: Item[];
 }
 
-export const solveDP = ({ items, capacity }: KnapsackInput): DPResult => {
+export const dp = ({ items, capacity }: KnapsackInput): DPResult => {
   const n = items.length;
 
   const table: number[][] = Array(n + 1)

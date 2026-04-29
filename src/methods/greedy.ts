@@ -11,10 +11,7 @@ export interface GreedyResult {
   totalValue: number;
 }
 
-export const solveGreedy = ({
-  items,
-  capacity,
-}: KnapsackInput): GreedyResult => {
+export const greedy = ({ items, capacity }: KnapsackInput): GreedyResult => {
   const itemsWithRatio: GreedyItem[] = items.map((item) => ({
     ...item,
     ratio: item.value / item.weight,
