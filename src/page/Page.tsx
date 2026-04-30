@@ -9,6 +9,8 @@ import { GreedyVisualization } from "../greedy/GreedyVisualization.tsx";
 import { greedy } from "../greedy/greedy.ts";
 import { branches } from "@/branches/branches.ts";
 import BranchesVisualization from "@/branches/BranchesVisualization.tsx";
+import { dp } from "@/dp/dp.ts";
+import DPVisualization from "@/dp/DPVisualization.tsx";
 
 const Page = () => {
   const [capacity, setCapacity] = useState<number>(10);
@@ -52,6 +54,11 @@ const Page = () => {
   const recursiveResults = useMemo(() => {
     if (activeMethod !== 2) return null;
     return recursive({ items, capacity });
+  }, [activeMethod, items, capacity]);
+
+  const dpResults = useMemo(() => {
+    if (activeMethod !== 3) return null;
+    return dp({ items, capacity });
   }, [activeMethod, items, capacity]);
 
   const greedyResults = useMemo(() => {
@@ -158,6 +165,14 @@ const Page = () => {
 
             {activeMethod === 2 && recursiveResults && (
               <RecursiveVisualization result={recursiveResults} />
+            )}
+
+            {activeMethod === 3 && dpResults && (
+              <DPVisualization
+                result={dpResults}
+                capacity={capacity}
+                key={dpResults.maxValue}
+              />
             )}
 
             {activeMethod === 4 && greedyResults && (

@@ -4,6 +4,7 @@ export interface DPResult {
   table: number[][];
   maxValue: number;
   selectedItems: Item[];
+  selectedCells: { row: number; col: number }[];
 }
 
 export const dp = ({ items, capacity }: KnapsackInput): DPResult => {
@@ -29,11 +30,14 @@ export const dp = ({ items, capacity }: KnapsackInput): DPResult => {
   }
 
   const selectedItems: Item[] = [];
+  const selectedCells: { row: number; col: number }[] = [];
   let currentCapacity = capacity;
+
   for (let i = n; i > 0; i--) {
     if (table[i][currentCapacity] !== table[i - 1][currentCapacity]) {
       const includedItem = items[i - 1];
       selectedItems.push(includedItem);
+      selectedCells.push({ row: i, col: currentCapacity });
       currentCapacity -= includedItem.weight;
     }
   }
@@ -41,8 +45,9 @@ export const dp = ({ items, capacity }: KnapsackInput): DPResult => {
   selectedItems.reverse();
 
   return {
-    table: table,
+    table,
     maxValue: table[n][capacity],
     selectedItems,
+    selectedCells,
   };
 };

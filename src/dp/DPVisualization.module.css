@@ -1,0 +1,65 @@
+.wrapper {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.summaryBox {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: var(--back-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.summaryValue {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--green-color);
+}
+
+.tableContainer {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.dpTable {
+  border-collapse: collapse;
+  margin: 0 auto;
+  min-width: 100%;
+}
+
+.dpTable th,
+.dpTable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+
+.header {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.cellValue {
+  opacity: 0;
+}
+
+.cellValue.visible {
+  opacity: 1;
+}
+
+.selectedCell {
+  color: var(--green-color);
+  font-weight: bold;
+}
+
+.selectedHeader {
+  background-color: var(--green-color);
+  color: white;
+}
