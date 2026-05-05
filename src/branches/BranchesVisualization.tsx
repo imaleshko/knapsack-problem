@@ -54,7 +54,7 @@ const TreeNode = ({ node }: TreeNodeProps) => {
 };
 
 export const BranchesVisualization = ({ result }: BranchesTableProps) => {
-  if (!result || !result.rootNode) return null;
+  if (!result) return null;
 
   return (
     <div className={styles.wrapper}>
@@ -67,7 +67,7 @@ export const BranchesVisualization = ({ result }: BranchesTableProps) => {
           <span>Оптимальний набір: </span>
           <span className={styles.summaryValue}>
             {result.bestItems.length > 0
-              ? `{${result.bestItems.map((i) => i.item).join(", ")}}`
+              ? `{${result.bestItems.map((item) => item.id).join(", ")}}`
               : "Порожньо"}
           </span>
         </p>

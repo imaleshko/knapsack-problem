@@ -1,4 +1,4 @@
-import type { Item, KnapsackInput } from "src/interfaces.ts";
+import type { Item, Input } from "../app/interfaces.ts";
 
 export interface GreedyItem extends Item {
   ratio: number;
@@ -12,10 +12,11 @@ export interface GreedyResult {
   totalValue: number;
 }
 
-export const greedy = ({ items, capacity }: KnapsackInput): GreedyResult => {
+export const greedy = ({ items, capacity }: Input): GreedyResult => {
   const itemsWithRatio: GreedyItem[] = items.map((item) => ({
     ...item,
     ratio: item.value / item.weight,
+    isSelected: false,
   }));
 
   const sortedItems = [...itemsWithRatio].sort((a, b) => {
@@ -35,8 +36,6 @@ export const greedy = ({ items, capacity }: KnapsackInput): GreedyResult => {
       selectedItems.push(item);
       currentWeight += item.weight;
       currentValue += item.value;
-    } else {
-      item.isSelected = false;
     }
   }
 

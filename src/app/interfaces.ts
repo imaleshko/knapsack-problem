@@ -1,10 +1,10 @@
 export interface Item {
-  item: number;
+  id: number;
   weight: number;
   value: number;
 }
 
-export interface KnapsackInput {
+export interface Input {
   items: Item[];
   capacity: number;
 }

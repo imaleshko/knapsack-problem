@@ -17,7 +17,7 @@ const TreeNode = ({ node }: TreeNodeProps) => {
       ? `Предмет: ${node.itemIndex + 1} | `
       : "";
 
-  const title = `${node.action} | ${itemInfo} | Залишок місткості: ${node.capacityLeft} | Повертає: ${node.returnedValue} |`;
+  const title = `${node.action} | ${itemInfo}Залишок місткості: ${node.capacityLeft} | Повертає: ${node.returnedValue} | `;
 
   let summaryClass = styles.treeSummary;
   let statusText = "";
@@ -25,9 +25,6 @@ const TreeNode = ({ node }: TreeNodeProps) => {
   if (node.isPartOfBestPath) {
     summaryClass = `${styles.treeSummary} ${styles.treeOptimal}`;
     statusText = "Оптимальний шлях";
-  } else if (isEnd && node.returnedValue === 0) {
-    summaryClass = `${styles.treeSummary} ${styles.treePruned}`;
-    statusText = "Базовий випадок";
   }
 
   if (isEnd) {
@@ -56,7 +53,7 @@ const TreeNode = ({ node }: TreeNodeProps) => {
 export const RecursiveVisualization = ({
   result,
 }: RecursiveVisualizationProps) => {
-  if (!result || !result.executionTree) return null;
+  if (!result) return null;
 
   return (
     <div className={styles.wrapper}>
@@ -69,7 +66,7 @@ export const RecursiveVisualization = ({
           <span>Оптимальний набір: </span>
           <span className={styles.summaryValue}>
             {result.bestItems.length > 0
-              ? `{${result.bestItems.map((i) => i.item).join(", ")}}`
+              ? `{${result.bestItems.map((item) => item.id).join(", ")}}`
               : "Порожньо"}
           </span>
         </p>

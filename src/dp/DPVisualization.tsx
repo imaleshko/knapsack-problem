@@ -40,58 +40,52 @@ export const DPVisualization = ({ result, capacity }: DPVisualizationProps) => {
         </p>
       </div>
 
-      <div className={styles.tableContainer}>
-        <table className={styles.dpTable}>
-          <thead>
-            <tr>
-              <th className={styles.header}>i \ w</th>
-              {Array.from({ length: capacity + 1 }).map((_, w) => (
-                <th className={styles.header} key={w}>
-                  {w}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {result.table.map((row, i) => (
-              <tr key={i}>
-                <td
-                  className={`${styles.header} ${
-                    result.selectedCells.some(
-                      (cell, index) => cell.row === i && index < lightedCount,
-                    )
-                      ? styles.selectedHeader
-                      : ""
-                  }`}
-                >
-                  {i}
-                </td>
-
-                {row.map((cell, w) => {
-                  const isVisible = i * (capacity + 1) + w < filledUntil;
-                  const isSelected = result.selectedCells.some(
-                    (c, idx) =>
-                      c.row === i && c.col === w && idx < lightedCount,
-                  );
-
-                  return (
-                    <td
-                      key={w}
-                      className={isSelected ? styles.selectedCell : ""}
-                    >
-                      <span
-                        className={`${styles.cellValue} ${isVisible ? styles.visible : ""}`}
-                      >
-                        {cell}
-                      </span>
-                    </td>
-                  );
-                })}
-              </tr>
+      <table className={styles.dpTable}>
+        <thead>
+          <tr>
+            <th className={styles.header}>i \ w</th>
+            {Array.from({ length: capacity + 1 }).map((_, w) => (
+              <th className={styles.header} key={w}>
+                {w}
+              </th>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </tr>
+        </thead>
+        <tbody>
+          {result.table.map((row, i) => (
+            <tr key={i}>
+              <td
+                className={`${styles.header} ${
+                  result.selectedCells.some(
+                    (cell, index) => cell.row === i && index < lightedCount,
+                  )
+                    ? styles.selectedHeader
+                    : ""
+                }`}
+              >
+                {i}
+              </td>
+
+              {row.map((cell, w) => {
+                const isVisible = i * (capacity + 1) + w < filledUntil;
+                const isSelected = result.selectedCells.some(
+                  (c, index) =>
+                    c.row === i && c.col === w && index < lightedCount,
+                );
+                return (
+                  <td key={w} className={isSelected ? styles.selectedCell : ""}>
+                    <span
+                      className={`${styles.cellValue} ${isVisible ? styles.visible : ""}`}
+                    >
+                      {cell}
+                    </span>
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

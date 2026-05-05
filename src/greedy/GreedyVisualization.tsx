@@ -1,4 +1,4 @@
-import type { GreedyResult } from "./greedy.ts"; // Перевірте шлях
+import type { GreedyResult } from "./greedy.ts";
 import styles from "./GreedyVisualization.module.css";
 
 interface GreedyTableProps {
@@ -16,7 +16,7 @@ export const GreedyVisualization = ({ result }: GreedyTableProps) => {
           <span className={styles.summaryValue}>{result.totalWeight}</span>
         </p>
         <p>
-          <span className={styles.summaryLabel}>Загальна цінність: </span>
+          <span>Загальна цінність: </span>
           <span className={styles.summaryValue}>{result.totalValue}</span>
         </p>
       </div>
@@ -36,8 +36,8 @@ export const GreedyVisualization = ({ result }: GreedyTableProps) => {
               : styles.rowSkipped;
 
             return (
-              <tr key={item.item} className={rowClass}>
-                <td className={styles.td}>Предмет {item.item}</td>
+              <tr key={item.id} className={rowClass}>
+                <td className={styles.td}>Предмет {item.id}</td>
                 <td className={styles.td}>{item.weight}</td>
                 <td className={styles.td}>{item.value}</td>
                 <td className={styles.td}>

@@ -18,18 +18,21 @@ export const BruteForceVisualization = ({ results }: BruteForceTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {results.map((res, index) => {
+        {results.map((result, index) => {
           let textClass = styles.textInvalid;
-          if (res.isBest) textClass = styles.textBest;
-          else if (res.isValid) textClass = styles.textValid;
+          if (result.isBest) {
+            textClass = styles.textBest;
+          } else if (result.isValid) {
+            textClass = styles.textValid;
+          }
 
           return (
             <tr key={index} className={textClass}>
               <td className={styles.td}>
-                {`{${res.subset.map((i) => i.item).join(", ")}}`}
+                {`{${result.subset.map((item) => item.id).join(", ")}}`}
               </td>
-              <td className={styles.td}>{res.totalWeight}</td>
-              <td className={styles.td}>{res.totalValue}</td>
+              <td className={styles.td}>{result.totalWeight}</td>
+              <td className={styles.td}>{result.totalValue}</td>
             </tr>
           );
         })}

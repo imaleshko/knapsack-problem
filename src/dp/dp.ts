@@ -1,4 +1,4 @@
-import type { Item, KnapsackInput } from "src/interfaces.ts";
+import type { Item, Input } from "../app/interfaces.ts";
 
 export interface DPResult {
   table: number[][];
@@ -7,7 +7,7 @@ export interface DPResult {
   selectedCells: { row: number; col: number }[];
 }
 
-export const dp = ({ items, capacity }: KnapsackInput): DPResult => {
+export const dp = ({ items, capacity }: Input): DPResult => {
   const n = items.length;
 
   const table: number[][] = Array(n + 1)

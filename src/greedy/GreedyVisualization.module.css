@@ -7,37 +7,36 @@
   justify-content: space-around;
   margin-bottom: 20px;
   padding: 15px;
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
+  background-color: var(--back-color);
+  border: var(--border);
   border-radius: 20px;
 }
 
 .summaryValue {
   font-weight: bold;
   font-size: 18px;
-  color: #2e7d32;
+  color: var(--green-color);
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-family: monospace;
 }
 
 .th,
 .td {
-  border: 1px solid #777;
+  border: var(--border);
   padding: 10px;
   text-align: center;
 }
 
 .th {
-  background-color: #f5f5f5;
+  background-color: var(--back-color);
   font-weight: bold;
 }
 
 .rowSelected {
-  color: #2e7d32;
+  color: var(--green-color);
   font-weight: bold;
 }
 

@@ -1,4 +1,4 @@
-import type { Item, KnapsackInput } from "@/interfaces.ts";
+import type { Item, Input } from "../app/interfaces.ts";
 
 export interface Node {
   stepId: number;
@@ -22,10 +22,7 @@ export interface BranchesResult {
   rootNode: Node;
 }
 
-export const branches = ({
-  items,
-  capacity,
-}: KnapsackInput): BranchesResult => {
+export const branches = ({ items, capacity }: Input): BranchesResult => {
   const n = items.length;
   let stepCounter = 0;
 
@@ -106,7 +103,7 @@ export const branches = ({
     const includeBranch: Node = {
       stepId: stepInclude,
       level: nextLevel,
-      currentItemId: currentItem.item,
+      currentItemId: currentItem.id,
       value: node.value + currentItem.value,
       weight: node.weight + currentItem.weight,
       bound: 0,
@@ -136,7 +133,7 @@ export const branches = ({
     const excludeBranch: Node = {
       stepId: stepExclude,
       level: nextLevel,
-      currentItemId: currentItem.item,
+      currentItemId: currentItem.id,
       value: node.value,
       weight: node.weight,
       bound: 0,
@@ -170,7 +167,7 @@ export const branches = ({
   }
 
   return {
-    maxValue: maxValue,
+    maxValue,
     bestItems,
     rootNode: root,
   };

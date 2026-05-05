@@ -1,4 +1,4 @@
-import type { Item, KnapsackInput } from "@/interfaces.ts";
+import type { Item, Input } from "../app/interfaces.ts";
 
 export interface RecursionNode {
   stepId: number;
@@ -17,10 +17,7 @@ export interface RecursiveResult {
   executionTree: RecursionNode;
 }
 
-export const recursive = ({
-  items,
-  capacity,
-}: KnapsackInput): RecursiveResult => {
+export const recursive = ({ items, capacity }: Input): RecursiveResult => {
   let stepCounter = 0;
 
   const knapsack = (
@@ -76,8 +73,8 @@ export const recursive = ({
       "Беремо",
     );
 
-    const excludeValue = excludeBranch.returnedValue;
     const includeValue = currentItem.value + includeBranch.returnedValue;
+    const excludeValue = excludeBranch.returnedValue;
 
     return {
       stepId: currentStepId,

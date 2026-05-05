@@ -1,4 +1,4 @@
-import type { Item, KnapsackInput } from "../interfaces.ts";
+import type { Item, Input } from "../app/interfaces.ts";
 
 export interface BruteForceResultLine {
   subset: Item[];
@@ -8,10 +8,7 @@ export interface BruteForceResultLine {
   isBest: boolean;
 }
 
-const bruteForce = ({
-  items,
-  capacity,
-}: KnapsackInput): BruteForceResultLine[] => {
+const bruteForce = ({ items, capacity }: Input): BruteForceResultLine[] => {
   const n = items.length;
   const totalCombinations = 1 << n;
   const allCombinations: BruteForceResultLine[] = [];
