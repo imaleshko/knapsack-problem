@@ -12,12 +12,18 @@ interface RecursiveVisualizationProps {
 const TreeNode = ({ node }: TreeNodeProps) => {
   const isEnd = !node.includeBranch && !node.excludeBranch;
 
-  const itemInfo =
-    node.action !== "Кінець масиву" && node.action !== "Вичерпано місткість"
-      ? `Предмет: ${node.itemIndex + 1} | `
-      : "";
+  let actionText = node.action;
+  if (
+    node.action === "Беремо" ||
+    node.action === "Пропускаємо" ||
+    node.action === "Не поміщається"
+  ) {
+    actionText = `${node.action} предмет ${node.itemIndex}`;
+  }
 
-  const title = `${node.action} | ${itemInfo}Залишок місткості: ${node.capacityLeft} | Повертає: ${node.returnedValue} | `;
+  const itemInfo = !isEnd ? `На черзі предмет ${node.itemIndex + 1} | ` : "";
+
+  const title = `${actionText} | ${itemInfo}Залишок місткості: ${node.capacityLeft} | Повертає: ${node.returnedValue} | `;
 
   let summaryClass = styles.treeSummary;
   let statusText = "";
